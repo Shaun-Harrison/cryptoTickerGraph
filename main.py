@@ -65,7 +65,9 @@ def fetch_prices(token):
     logger.info(geckourl24h)
     raw24h = requests.get(geckourl24h).json()
     actual24h = raw24h[str(tokenname)]['usd_24h_change']
+    liveprice = raw24h[str(tokenname)]['usd']
     # Add values to list
+    prices.append(liveprice)
     prices.append(actual24h)
     prices.append(token)
     return prices
