@@ -42,7 +42,7 @@ class Plot:
     def caption(price, coin, change, y, screen_width, font, draw):
         #now = datetime.now()
         #current_time = now.strftime("%H:%M")
-        draw.text((-1, y), str(coin), font=font)
+        #draw.text((-1, y), str(coin), font=font)
         if coin == "OMI":
             formatting = "%.4f"
         elif coin == "MOON":
@@ -53,10 +53,10 @@ class Plot:
             formatting = "%.2f"
         #price_text = coin + ": $" + formatting % price
         #price_text = "$" + formatting % price
-        price_text = "$" + formatting % price + "  " + "%.2f" % change
+        price_text = coin + "  $" + formatting % price + "  " + "%.2f" % change
         price_text += "%"
         text_width, _ = draw.textsize(price_text, font)
-        price_position = (((screen_width - text_width - 60) / 2) + 60, y)
+        price_position = (((screen_width - text_width) / 2), y)
         #price_position = (40, y)
         draw.text(price_position, price_text, font=font)
 
