@@ -1,5 +1,7 @@
 # cryptoTickerGraph
 
+![Image Preview](https://github.com/Shaun-Harrison/cryptoTickerGraph/blob/main/eth_screenshot.jpg?raw=true)
+
 Modified version of https://github.com/dr-mod/zero-btc-screen 
 
 Changes include 
