@@ -18,10 +18,8 @@ from presentation.observer import Observable
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
-
-#CRYPTO = ['bitcoin','ethereum','solana','polkadot']
 CRYPTO = ['BTC','ETH','SOL','DOT','OMI','BAN','MOON']
-#CRYPTO = ['BTC']
+
 
 def get_dummy_data():
     logger.info('Generating dummy data')
@@ -85,7 +83,6 @@ def main():
     while True:
         for coin in itertools.cycle(CRYPTO):
             try:
-                #prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices(coin)
                 prices = fetch_prices(coin)
                 if prices != "null":
                     data_sink.update_observers(prices)
@@ -97,7 +94,6 @@ def main():
                 logger.info('Exit')
                 data_sink.close()
                 exit()
-
 
 if __name__ == "__main__":
     main()
