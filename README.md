@@ -6,7 +6,7 @@ Modified version of https://github.com/dr-mod/zero-btc-screen
 
 Follow all setup instructions in this repo before cloning this repo
 
-Changes include 
+Changes include;
 -   Use coingecko to get price information - This API has more options than the previous
 -   Multiple Tokens - see main.py line 21 & 34 to modify token list
 -   Daily percentage - Added in the coins daily percentage change
