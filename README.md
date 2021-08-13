@@ -3,6 +3,7 @@
 ![Image Preview](https://github.com/Shaun-Harrison/cryptoTickerGraph/blob/main/eth_screenshot.jpg?raw=true)
 
 Modified version of https://github.com/dr-mod/zero-btc-screen 
+Follow all setup instructions in this repo before cloning this repo
 
 Changes include 
 -   Use coingecko to get price information - This API has more options than the previous
