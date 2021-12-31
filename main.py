@@ -78,7 +78,7 @@ def fetch_prices(token):
         actual24h = raw24h[str(tokenname)]['usd_24h_change']
         liveprice = raw24h[str(tokenname)]['usd']
         # Publish Value to MQTT
-        client.publish(topic="crypto/ticker/" + deviceName + "/" + token + "/state", payload='{"'+ token.lower() +'":"'+ str(liveprice) +'"}', qos=1, retain=True)
+        client.publish(topic="crypto/ticker/" + deviceName + "/" + token + "/state", payload='{"'+ token.lower() +'":"'+ str(liveprice) +'"}', qos=1, retain=False)
 
         # Add values to list
         prices.append(liveprice)
