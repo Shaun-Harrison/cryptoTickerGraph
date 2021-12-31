@@ -77,7 +77,7 @@ def fetch_prices(token):
         # Publish Value to MQTT
         logger.info("Publishing to MQTT")
         state_topic = 'homeassistant/ticker/' + token.lower()
-        client.publish(state_topic, str(liveprice))
+        client.publish(state_topic, token.lower())
         # Add values to list
         prices.append(liveprice)
         prices.append(actual24h)
