@@ -16,16 +16,23 @@ from config.config import config
 from logs import logger
 from presentation.observer import Observable
 
+import paho.mqtt.client as mqtt
+
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
 CRYPTO = ['BTC','ETH','SOL','DOT','OMI','BAN','MOON']
-
+broker_url = "192.168.1.251"#MQTT server IP
+broker_port = 1883 #MQTT server port
+client = mqtt.Client()
+deviceName= "RPI0Crypto"
 
 def get_dummy_data():
     logger.info('Generating dummy data')
 
 def fetch_prices(token):
     try:
+        client.connect(broker_url, broker_port)
+        client.publish(topic="homeassistant/sensor/" + deviceName + "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_sensor_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_sensor"],"name":"' + deviceName + 'Sensors","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
         days_ago = DATA_SLICE_DAYS
         endtime = int(time.time())
         starttime = endtime - 60*60*24*days_ago
@@ -65,6 +72,8 @@ def fetch_prices(token):
         raw24h = requests.get(geckourl24h).json()
         actual24h = raw24h[str(tokenname)]['usd_24h_change']
         liveprice = raw24h[str(tokenname)]['usd']
+        # Publish Value to MQTT
+        client.publish(topic="crypto/ticker/" + deviceName + "/state", payload='{"' + token + '":' + liveprice + '"}', qos=1, retain=False)
         # Add values to list
         prices.append(liveprice)
         prices.append(actual24h)
