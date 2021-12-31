@@ -31,7 +31,6 @@ def get_dummy_data():
 
 def fetch_prices(token):
     try:
-        client.connect(broker_url, broker_port)
         client.publish(topic="homeassistant/crypto/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
         days_ago = DATA_SLICE_DAYS
         endtime = int(time.time())
@@ -73,7 +72,7 @@ def fetch_prices(token):
         actual24h = raw24h[str(tokenname)]['usd_24h_change']
         liveprice = raw24h[str(tokenname)]['usd']
         # Publish Value to MQTT
-        logger.info("publishing"+liveprice+"to MQTT")
+        logger.info("Publishing to MQTT")
         client.publish(topic="crypto/ticker/" + deviceName + "/state", payload='{"' + token + '":' + liveprice + '"}', qos=1, retain=False)
         # Add values to list
         prices.append(liveprice)
@@ -89,6 +88,7 @@ def main():
     data_sink = Observable()
     builder = Builder(config)
     builder.bind(data_sink)
+    client.connect(broker_url, broker_port)
 
     while True:
         for coin in itertools.cycle(CRYPTO):
