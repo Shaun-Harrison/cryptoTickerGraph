@@ -25,7 +25,13 @@ broker_url = "192.168.1.251"#MQTT server IP
 broker_port = 1883 #MQTT server port
 client = mqtt.Client()
 deviceName= "RPI0Crypto"
-
+btcmqtt = ""
+ethmqtt = ""
+solmqtt = ""
+dotmqtt = ""
+omimqtt = ""
+banmqtt = ""
+moonmqtt = ""
 def get_dummy_data():
     logger.info('Generating dummy data')
 
@@ -71,13 +77,6 @@ def fetch_prices(token):
         raw24h = requests.get(geckourl24h).json()
         actual24h = raw24h[str(tokenname)]['usd_24h_change']
         liveprice = raw24h[str(tokenname)]['usd']
-        btcmqtt = ""
-        ethmqtt = ""
-        solmqtt = ""
-        dotmqtt = ""
-        omimqtt = ""
-        banmqtt = ""
-        moonmqtt = ""
         # Publish Value to MQTT
         if token == "BTC":
             btcmqtt = liveprice
