@@ -37,7 +37,6 @@ def get_dummy_data():
 
 def fetch_prices(token):
     try:
-        client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + "/" + token + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
         days_ago = DATA_SLICE_DAYS
         endtime = int(time.time())
         starttime = endtime - 60*60*24*days_ago
@@ -95,6 +94,7 @@ def main():
     builder = Builder(config)
     builder.bind(data_sink)
     client.connect(broker_url, broker_port)
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + "/" + token + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
 
     while True:
         for coin in itertools.cycle(CRYPTO):
