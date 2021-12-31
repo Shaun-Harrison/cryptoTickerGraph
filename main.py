@@ -32,7 +32,7 @@ def get_dummy_data():
 def fetch_prices(token):
     try:
         client.connect(broker_url, broker_port)
-        client.publish(topic="homeassistant/sensor/" + deviceName + "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_sensor_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_sensor"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+        client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_sensor_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
         days_ago = DATA_SLICE_DAYS
         endtime = int(time.time())
         starttime = endtime - 60*60*24*days_ago
