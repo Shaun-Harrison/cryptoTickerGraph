@@ -31,7 +31,7 @@ def get_dummy_data():
 
 def fetch_prices(token):
     try:
-        client.publish(topic="homeassistant/crypto/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"cryptograph/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_cryptograph"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+        client.publish(topic="homeassistant/crypto/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + 'graph","state_topic":"cryptograph/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_cryptograph"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
         days_ago = DATA_SLICE_DAYS
         endtime = int(time.time())
         starttime = endtime - 60*60*24*days_ago
