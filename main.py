@@ -94,7 +94,20 @@ def main():
     builder = Builder(config)
     builder.bind(data_sink)
     client.connect(broker_url, broker_port)
-    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + '","state_topic":"crypto/ticker/' + deviceName + "/" + token + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # BTC
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "BTC/config", payload='{"name":"' + deviceName + 'BTC","state_topic":"crypto/ticker/' + deviceName + '/BTC/state","unit_of_measurement":"$","value_template":"{{ value_json.btc}}","unique_id":"'+ deviceName.lower() + '_btc","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # ETH
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "ETH/config", payload='{"name":"' + deviceName + 'ETH","state_topic":"crypto/ticker/' + deviceName + '/ETH/state","unit_of_measurement":"$","value_template":"{{ value_json.eth}}","unique_id":"'+ deviceName.lower() + '_eth","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # SOL
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "SOL/config", payload='{"name":"' + deviceName + 'SOL","state_topic":"crypto/ticker/' + deviceName + '/SOL/state","unit_of_measurement":"$","value_template":"{{ value_json.sol}}","unique_id":"'+ deviceName.lower() + '_sol","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # DOT
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "DOT/config", payload='{"name":"' + deviceName + 'DOT","state_topic":"crypto/ticker/' + deviceName + '/DOT/state","unit_of_measurement":"$","value_template":"{{ value_json.dot}}","unique_id":"'+ deviceName.lower() + '_dot","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # OMI
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "OMI/config", payload='{"name":"' + deviceName + 'OMI","state_topic":"crypto/ticker/' + deviceName + '/OMI/state","unit_of_measurement":"$","value_template":"{{ value_json.omi}}","unique_id":"'+ deviceName.lower() + '_omi","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # BAN
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "BAN/config", payload='{"name":"' + deviceName + 'BAN","state_topic":"crypto/ticker/' + deviceName + '/BAN/state","unit_of_measurement":"$","value_template":"{{ value_json.ban}}","unique_id":"'+ deviceName.lower() + '_ban","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+    # MOON
+    client.publish(topic="homeassistant/sensor/" + deviceName +  "/" + deviceName + "MOON/config", payload='{"name":"' + deviceName + 'MOON","state_topic":"crypto/ticker/' + deviceName + '/MOON/state","unit_of_measurement":"$","value_template":"{{ value_json.moon}}","unique_id":"'+ deviceName.lower() + '_moon","device":{"identifiers":["' + deviceName.lower() + '_crypto"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
 
     while True:
         for coin in itertools.cycle(CRYPTO):
