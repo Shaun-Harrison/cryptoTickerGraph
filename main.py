@@ -78,24 +78,8 @@ def fetch_prices(token):
         actual24h = raw24h[str(tokenname)]['usd_24h_change']
         liveprice = raw24h[str(tokenname)]['usd']
         # Publish Value to MQTT
-        if token == "BTC":
-            btcmqtt = liveprice
-        elif token == "ETH":
-            ethmqtt = liveprice
-        elif token == "SOL":
-            solmqtt = liveprice
-        elif token == "DOT":
-            dotmqtt = liveprice
-        elif token == "OMI":
-            omimqtt = liveprice
-        elif token == "BAN":
-            banmqtt = liveprice
-        elif token == "MOON":
-            moonmqtt = liveprice
-            client.publish(topic="crypto/ticker/" + deviceName + "/state", payload='{"btc":"'+ str(btcmqtt) +',"eth":"'+ str(ethmqtt) +',"sol":"'+ str(solmqtt) +',"dot":"'+ str(dotmqtt) +',"omi":"'+ str(omimqtt) +',"ban":"'+ str(banmqtt) +',"moon":"'+ str(moonmqtt) +'"}', qos=1, retain=True)
-        else:
-            print("Unknown Token, please add to if statement")
-            exit()
+        logger.info("Publishing to MQTT")
+        client.publish(topic="crypto/ticker/" + deviceName + "/state", payload='{"'+ token.lower() +'":"'+ str(liveprice) +'"}', qos=1, retain=True)
         # Add values to list
         prices.append(liveprice)
         prices.append(actual24h)
