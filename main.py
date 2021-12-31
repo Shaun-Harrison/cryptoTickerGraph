@@ -102,7 +102,7 @@ def main():
                 prices = fetch_prices(coin)
                 if prices != "null":
                     data_sink.update_observers(prices)
-                    time.sleep(30)
+                    time.sleep(300)
             except (HTTPError, URLError) as e:
                 logger.info(str(e))
                 time.sleep(5)
