@@ -17,8 +17,6 @@ from logs import logger
 from presentation.observer import Observable
 
 import paho.mqtt.client as mqtt
-import paho.mqtt.publish as publish
-
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
@@ -33,8 +31,7 @@ def get_dummy_data():
 
 def fetch_prices(token):
     try:
-        publish.single('home-assistant/ticker/active', 'Active', hostname=broker)
-        #client.publish(topic="homeassistant/crypto/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + 'graph","state_topic":"cryptograph/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_cryptograph"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
+        client.publish(topic="homeassistant/crypto/" + deviceName +  "/" + deviceName + token + "/config", payload='{"name":"' + deviceName + token + 'graph","state_topic":"cryptograph/ticker/' + deviceName + '/state","unit_of_measurement":"$","value_template":"{{ value_json.' + token.lower() + '}}","unique_id":"'+ deviceName.lower() + '_' + token.lower() + '","device":{"identifiers":["' + deviceName.lower() + '_cryptograph"],"name":"' + deviceName + 'Crypto","model":"RPI ' + deviceName + '","manufacturer":"RPI"}}', qos=1, retain=True)
         days_ago = DATA_SLICE_DAYS
         endtime = int(time.time())
         starttime = endtime - 60*60*24*days_ago
@@ -76,8 +73,7 @@ def fetch_prices(token):
         liveprice = raw24h[str(tokenname)]['usd']
         # Publish Value to MQTT
         logger.info("Publishing to MQTT")
-        state_topic = 'homeassistant/ticker/' + token.lower()
-        client.publish(state_topic, token.lower())
+        client.publish(topic="cryptograph/ticker/" + deviceName + "/state", payload='{"'+ token.lower() +'":"'+ str(liveprice) +'"}', qos=1, retain=True)
         # Add values to list
         prices.append(liveprice)
         prices.append(actual24h)
