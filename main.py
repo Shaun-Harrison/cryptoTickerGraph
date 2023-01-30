@@ -18,7 +18,7 @@ from presentation.observer import Observable
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
-CRYPTO = ['BTC','ETH','SOL','DOT','OMI','BAN','MOON']
+CRYPTO = ['BTC','ETH','SOL','DOT','OMI','ATOM','MOON']
 
 def get_dummy_data():
     logger.info('Generating dummy data')
@@ -40,8 +40,8 @@ def fetch_prices(token):
             tokenname = "polkadot"
         elif token == "OMI":
             tokenname = "ecomi"
-        elif token == "BAN":
-            tokenname = "banano"
+        elif token == "ATOM":
+            tokenname = "atom"
         elif token == "MOON":
             tokenname = "moon"
         else:
@@ -86,7 +86,7 @@ def main():
                 prices = fetch_prices(coin)
                 if prices != "null":
                     data_sink.update_observers(prices)
-                    time.sleep(30)
+                    time.sleep(300)
             except (HTTPError, URLError) as e:
                 logger.info(str(e))
                 time.sleep(5)
