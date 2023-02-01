@@ -41,7 +41,7 @@ def fetch_prices(token):
         elif token == "OMI":
             tokenname = "ecomi"
         elif token == "ATOM":
-            tokenname = "atom"
+            tokenname = "cosmos"
         elif token == "MOON":
             tokenname = "moon"
         else:
